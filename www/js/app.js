@@ -30,16 +30,20 @@ module.run(function($ionicPlatform) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if(window.StatusBar) {
-      StatusBar.styleDefault();
+      StatusBar.styleLightContent();
     }
   });
 })
 
-module.controller('HallsCtrl', ['$scope', '$http', function($scope, $http) {
+var BASE_URL = 'http://varunramesh.net:3000/';
+
+module.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', function($scope, $http, $ionicLoading) {
     $scope.halls = [];
     $scope.refresh = function() {
-        $http.get('http://varunramesh.net:3000/halls').success(function(data) {
+        $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
             $scope.halls = data;
+        }).error(function(data, status, headers, config) {
+            $ionicLoading.show({ template: 'Could not load dining halls.', noBackdrop: true, duration: 2000 });
         }).finally(function() {
             // Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
