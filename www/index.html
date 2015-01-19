@@ -36,9 +36,9 @@
           <ion-list>
 
               <div class="item" ng-repeat="hall in halls">
-                <div class="row">
+                <div ng-if="hall.open" class="row">
                   <div class="col col-80">
-                    <strong>{{hall.name}}</strong> <br> <br> Open for dinner
+                    <strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
                   </div>
                   <div class="col col-20" align="right">
                     <div class="row">
@@ -47,7 +47,7 @@
                       </button>
                     </div>
                     <div class="row">
-                      <div class="centered_text">10</div>
+                      <div class="centered_text">{{ score(hall) }}</div>
                     </div>
                     <div class="row">
                       <button class="button button-clear button-dark centered_text">
@@ -56,14 +56,22 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div ng-if="hall.open" class="row">
                   <div class="col">
-                    <p> X comments </p>
+                    <p>{{hall.comments}} comments</p>
                   </div>
                   <div class="col" align="right">
-                    <p> Closes in X minutes </p>
+                    <p>Closes {{hall.closes}}</p>
                   </div>
                 </div>
+                  <div ng-if="!hall.open" class="row">
+                      <div class="col">
+                          <strong>{{hall.name}}</strong>
+                      </div>
+                      <div class="col" align="right">
+                          <p>Closed</p>
+                      </div>
+                  </div>
               </div>
           </ion-list>
 

@@ -49,5 +49,12 @@ module.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', function($sc
             $scope.$broadcast('scroll.refreshComplete');
         });;
     }
+    $scope.score = function(hall) {
+        return hall.upvotes - hall.downvotes;
+    }
+    $scope.mealdesc = function(hall) {
+        if(hall.mealdesc) return hall.mealdesc;
+        else return "Open for " + hall.meal.charAt(0).toUpperCase() + hall.meal.slice(1);
+    }
     $scope.refresh();
 }]);
