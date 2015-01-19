@@ -29,9 +29,15 @@
       </ion-header-bar>
       <ion-content ng-controller="HallsCtrl">
 
-<div ng-repeat="hall in halls" class="list card">
-{{hall.name}}
-</div>
+          <ion-refresher
+                  pulling-text="Pull to refresh..."
+                  on-refresh="refresh()">
+          </ion-refresher>
+          <ion-list>
+              <ion-item ng-repeat="hall in halls">
+                  {{hall.name}}
+              </ion-item>
+          </ion-list>
 
       </ion-content>
     </ion-pane>

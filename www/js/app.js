@@ -18,7 +18,14 @@ module.run(function($ionicPlatform) {
 })
 
 module.controller('HallsCtrl', ['$scope', '$http', function($scope, $http) {
-  $http.get('http://varunramesh.net:3000/halls').success(function(data) {
-    $scope.halls = data;
-  });
+    $scope.halls = [];
+    $scope.refresh = function() {
+        $http.get('http://varunramesh.net:3000/halls').success(function(data) {
+            $scope.halls = data;
+        }).finally(function() {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+        });;
+    }
+    $scope.refresh();
 }]);
