@@ -34,9 +34,12 @@
                   on-refresh="refresh()">
           </ion-refresher>
           <ion-list>
-              <ion-item ng-repeat="hall in halls">
-                  {{hall.name}}
-              </ion-item>
+              <div class="item item-button-right" ng-repeat="hall in halls">
+                {{hall.name}}
+                <button class="button button-clear button-dark">
+                  <i class="icon ion-chevron-right"></i>
+                </button>
+              </div>
           </ion-list>
 
       </ion-content>
