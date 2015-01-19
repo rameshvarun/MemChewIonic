@@ -36,11 +36,11 @@
           <ion-list>
 
               <div class="item" ng-repeat="hall in halls">
-                <div class="row row-center">
+                <div class="row">
                   <div class="col col-80">
-                    {{hall.name}}
+                    <strong>{{hall.name}}</strong> <br> <br> Open for dinner
                   </div>
-                  <div class="col col-20">
+                  <div class="col col-20" align="right">
                     <div class="row">
                       <button class="button button-clear button-dark centered_text">
                         <i class="icon ion-chevron-up"></i>
@@ -54,6 +54,14 @@
                         <i class="icon ion-chevron-down"></i>
                       </button>
                     </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <p> X comments </p>
+                  </div>
+                  <div class="col" align="right">
+                    <p> Closes in X minutes </p>
                   </div>
                 </div>
               </div>
