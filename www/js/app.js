@@ -95,14 +95,17 @@ app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$
     }
 
     $scope.go = function ( hall ) {
-        window.hall = hall;
-        $location.path('/hall/' + hall.id);
+        if(hall.open){
+            window.hall = hall;
+            $location.path('/hall/' + hall.id);
+        }
     };
 
     $scope.refresh();
 }]);
 
 app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate) {
+
     var HALL_ID = $stateParams.id;
     $scope.hall = window.hall;
     $scope.refresh = function() {
@@ -117,6 +120,13 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
             // Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
         });
+    }
+    $scope.score = function(hall) {
+        return hall.upvotes - hall.downvotes;
+    }
+    $scope.mealdesc = function(hall) {
+        if(hall.mealdesc) return hall.mealdesc;
+        else return "Open for " + hall.meal.charAt(0).toUpperCase() + hall.meal.slice(1);
     }
 
     $scope.refresh();

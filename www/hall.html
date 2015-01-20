@@ -4,7 +4,7 @@
 	    	<div class="item">
 	    		<div class="row">
 	            	<div class="col col-80">
-	                	<strong>DINING HALL</strong> <br> <br> MEAL DESCRIPTION
+	                	<strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
 	            	</div>
 	            	<div class="col col-20" align="right">
 	                	<div class="row">
@@ -13,7 +13,7 @@
 	                    	</button>
 	                	</div>
 	            		<div class="row">
-	                    	<div class="centered_text rating-{{hall.rating}}">{{ 100 }}</div>
+	                    	<div class="centered_text rating-{{hall.rating}}">{{ score(hall) }}</div>
 	              		</div>
 	                	<div class="row">
 	                    	<button ng-click="rate(hall, 'downvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
@@ -24,10 +24,10 @@
 	        	</div>
 	        	<div class="row">
 	            	<div class="col">
-	                	<p>100 comments</p>
+	                	<p>{{hall.comments}} comments</p>
 	            	</div>
 	            	<div class="col" align="right">
-	                	<p>Closes NEVER</p>
+	                	<p>Closes {{hall.closes}}</p>
 	            	</div>
 		        </div>
 		    </div>
