@@ -21,8 +21,21 @@ var USER_ID = window.localStorage['userid'];
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var module = angular.module('starter', ['ionic'])
-module.run(function($ionicPlatform) {
+var app = angular.module('starter', ['ionic'])
+
+app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/')
+
+    $stateProvider.state('home', {
+        url: '/',
+        templateUrl: 'home.html'
+    }).state('hall', {
+        url: '/hall/:name',
+        templateUrl: 'hall.html'
+    });
+})
+
+app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -37,7 +50,7 @@ module.run(function($ionicPlatform) {
 
 var BASE_URL = 'http://varunramesh.net:3000/';
 
-module.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', function($scope, $http, $ionicLoading) {
+app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', function($scope, $http, $ionicLoading, $location) {
     $scope.halls = [];
     $scope.refresh = function() {
         $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
@@ -80,5 +93,27 @@ module.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', function($sc
             $ionicLoading.show({ template: 'Could not upvote.', noBackdrop: true, duration: 2000 });
         });
     }
+
+    $scope.go = function ( path ) {
+        $location.path( path );
+    };
+
     $scope.refresh();
+}]);
+
+app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', function($scope, $http, $ionicLoading, $location) {
+   /* var HALL_ID = $routeParams.hallid;
+    $scope.hall = {};
+    $scope.refresh = function() {
+        $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
+            $scope.halls = data;
+        }).error(function(data, status, headers, config) {
+            $ionicLoading.show({ template: 'Could not load dining halls.', noBackdrop: true, duration: 2000 });
+        }).finally(function() {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    }
+
+    $scope.refresh();*/
 }]);

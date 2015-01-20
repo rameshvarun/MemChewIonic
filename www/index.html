@@ -23,59 +23,19 @@
   </head>
   <body ng-app="starter">
 
-    <ion-pane>
-      <ion-header-bar class="bar-assertive">
-        <h1 class="title">Dining Halls</h1>
-      </ion-header-bar>
-      <ion-content ng-controller="HallsCtrl">
+  <ion-nav-bar class="bar-assertive">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      </ion-nav-back-button>
+  </ion-nav-bar>
 
-          <ion-refresher
-                  pulling-text="Pull to refresh..."
-                  on-refresh="refresh()">
-          </ion-refresher>
-          <ion-list>
+  <ion-nav-view></ion-nav-view>
 
-              <div class="item" ng-repeat="hall in halls">
-                <div ng-if="hall.open" class="row">
-                  <div class="col col-80">
-                    <strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
-                  </div>
-                  <div class="col col-20" align="right">
-                    <div class="row">
-                      <button ng-click="rate(hall, 'upvote')" class="button button-clear button-dark centered_text">
-                        <i class="icon ion-chevron-up {{ hall.rating == 'upvote' ? 'rating-upvote' : 'rating-none'}}"></i>
-                      </button>
-                    </div>
-                    <div class="row">
-                      <div class="centered_text rating-{{hall.rating}}">{{ score(hall) }}</div>
-                    </div>
-                    <div class="row">
-                      <button ng-click="rate(hall, 'downvote')" class="button button-clear button-dark centered_text">
-                        <i class="icon ion-chevron-down {{ hall.rating == 'downvote' ? 'rating-downvote' : 'rating-none'}}"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div ng-if="hall.open" class="row">
-                  <div class="col">
-                    <p>{{hall.comments}} comments</p>
-                  </div>
-                  <div class="col" align="right">
-                    <p>Closes {{hall.closes}}</p>
-                  </div>
-                </div>
-                  <div ng-if="!hall.open" class="row">
-                      <div class="col">
-                          <strong>{{hall.name}}</strong>
-                      </div>
-                      <div class="col" align="right">
-                          <p>Closed</p>
-                      </div>
-                  </div>
-              </div>
-          </ion-list>
+  <script type="text/ng-template" src="home.html">
+  </script>
 
-      </ion-content>
-    </ion-pane>
-  </body>
-</html>
+  <script type="text/ng-template" src="hall.html">
+  </script>
+
+
+    </body>
+  </html>
