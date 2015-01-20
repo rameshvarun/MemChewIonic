@@ -1,6 +1,41 @@
 <ion-view ng-controller="HallCtrl" view-title="Hall Detail">
     <ion-pane>
-
+    	<div class="row">
+            <div class="col col-80">
+                <strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
+            </div>
+            <div class="col col-20" align="right">
+                <div class="row">
+                    <button ng-click="rate(hall, 'upvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
+                        <i class="icon ion-chevron-up {{ hall.rating == 'upvote' ? 'rating-upvote' : 'rating-none'}}"></i>
+                    </button>
+                </div>
+            	<div class="row">
+                    <div class="centered_text rating-{{hall.rating}}">{{ score(hall) }}</div>
+              	</div>
+                <div class="row">
+                    <button ng-click="rate(hall, 'downvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
+                    	<i class="icon ion-chevron-down {{ hall.rating == 'downvote' ? 'rating-downvote' : 'rating-none'}}"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div ng-if="hall.open" class="row">
+            <div class="col">
+                <p>{{hall.comments}} comments</p>
+            </div>
+            <div class="col" align="right">
+                <p>Closes {{hall.closes}}</p>
+            </div>
+        </div>
+        <div ng-if="!hall.open" class="row">
+            <div class="col">
+                <strong>{{hall.name}}</strong>
+            </div>
+            <div class="col" align="right">
+                <p>Closed</p>
+            </div>
+        </div>
 
     </ion-pane>
 </ion-view>
