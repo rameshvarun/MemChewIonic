@@ -1,5 +1,5 @@
 <ion-view ng-controller="HallCtrl">
-    <ion-pane class="has-header">
+    <ion-content scroll="false" class="has-header">
     	<div class="item">
     		<div class="row">
             	<div class="col col-80">
@@ -30,5 +30,42 @@
             	</div>
 	        </div>
 	    </div>
-    </ion-pane>
+
+
+        <ion-list>
+            <div class="item" ng-repeat="comment in comments">
+                <div class="row">
+                    <div ng-if="comment.text" class="col col-80">
+                       {{comment.text}}
+                    </div>
+                    <div ng-if="comment.image" class="col col-80 comment-image">
+                        <img class="comment-image" src="data:image/jpeg;base64,{{comment.image}}"></img>
+                    </div>
+
+                    <div class="col col-20" align="right">
+                        <div class="row">
+                            <button ng-click="rate(comment, 'upvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
+                                <i class="icon ion-chevron-up {{ comment.rating == 'upvote' ? 'rating-upvote' : 'rating-none'}}"></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="centered_text rating-{{comment.rating}}">{{ score(comment) }}</div>
+                        </div>
+                        <div class="row">
+                            <button ng-click="rate(comment, 'downvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
+                                <i class="icon ion-chevron-down {{ comment.rating == 'downvote' ? 'rating-downvote' : 'rating-none'}}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>{{comment.time}}</p>
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+
+    </ion-content>
+
 </ion-view>

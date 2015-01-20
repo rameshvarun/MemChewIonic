@@ -22,3 +22,11 @@
 .rating-downvote {
     color: #f00a00;
 }
+
+.comment-image > img {
+    max-width: 300px;
+    max-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

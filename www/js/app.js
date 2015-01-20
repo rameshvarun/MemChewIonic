@@ -50,28 +50,9 @@ app.run(function($ionicPlatform) {
 
 var BASE_URL = 'http://varunramesh.net:3000/';
 
-app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $ionicNavBarDelegate) {
-    $scope.halls = [];
-    $scope.refresh = function() {
-        $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
-            $scope.halls = data;
-        }).error(function(data, status, headers, config) {
-            $ionicLoading.show({ template: 'Could not load dining halls.', noBackdrop: true, duration: 2000 });
-        }).finally(function() {
-            // Stop the ion-refresher from spinning
-            $scope.$broadcast('scroll.refreshComplete');
-        });;
-    }
-    $scope.score = function(hall) {
-        return hall.upvotes - hall.downvotes;
-    }
-    $scope.mealdesc = function(hall) {
-        if(hall.mealdesc) return hall.mealdesc;
-        else return "Open for " + hall.meal.charAt(0).toUpperCase() + hall.meal.slice(1);
-    }
-
-    $scope.rate = function(hall, action) {
-        var request = BASE_URL + "rate?item=" + hall.mealid + "&user=" + USER_ID + "&action=" + action;
+function rate_function($http, $ionicLoading) {
+    return function(hall, action) {
+        var request = BASE_URL + "rate?item=" + (hall.mealid || hall.id) + "&user=" + USER_ID + "&action=" + action;
 
         $http.get(request).success(function(data) {
             if(data.error) {
@@ -93,6 +74,29 @@ app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$
             $ionicLoading.show({ template: 'Could not upvote.', noBackdrop: true, duration: 2000 });
         });
     }
+}
+
+app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $ionicNavBarDelegate) {
+    $scope.halls = [];
+    $scope.refresh = function() {
+        $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
+            $scope.halls = data;
+        }).error(function(data, status, headers, config) {
+            $ionicLoading.show({ template: 'Could not load dining halls.', noBackdrop: true, duration: 2000 });
+        }).finally(function() {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+        });;
+    }
+    $scope.score = function(hall) {
+        return hall.upvotes - hall.downvotes;
+    }
+    $scope.mealdesc = function(hall) {
+        if(hall.mealdesc) return hall.mealdesc;
+        else return "Open for " + hall.meal.charAt(0).toUpperCase() + hall.meal.slice(1);
+    }
+
+    $scope.rate = rate_function($http, $ionicLoading);
 
     $scope.go = function ( hall ) {
         if(hall.open){
@@ -108,9 +112,10 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
 
     var HALL_ID = $stateParams.id;
     $scope.hall = window.hall;
+    $scope.comments = [];
+
     $scope.refresh = function() {
         $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
-            console.log(data);
             angular.forEach(data, function(hall, index){
                if(hall.id == HALL_ID) $scope.hall = hall;
             });
@@ -120,6 +125,12 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
             // Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
         });
+
+        if($scope.hall) {
+            $http.get(BASE_URL + "comments?user=" + USER_ID + "&meal=" + $scope.hall.mealid).success(function(data) {
+                $scope.comments = data;
+            });
+        }
     }
     $scope.score = function(hall) {
         return hall.upvotes - hall.downvotes;
@@ -128,6 +139,8 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
         if(hall.mealdesc) return hall.mealdesc;
         else return "Open for " + hall.meal.charAt(0).toUpperCase() + hall.meal.slice(1);
     }
+
+    $scope.rate = rate_function($http, $ionicLoading);
 
     $scope.refresh();
 }]);
