@@ -111,7 +111,6 @@ app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$
 
 function resize() {
     var height = document.getElementById("content-pane").offsetHeight - document.getElementById("header").offsetHeight - document.getElementById("footer").offsetHeight;
-    console.log(height);
     document.getElementById("comments").style.height = height + "px";
 }
 
