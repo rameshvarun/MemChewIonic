@@ -10,3 +10,15 @@
 .row {
 	padding:0px;
 }
+
+.rating-none {
+
+}
+
+.rating-upvote {
+    color: #00d304;
+}
+
+.rating-downvote {
+    color: #f00a00;
+}

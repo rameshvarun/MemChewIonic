@@ -56,5 +56,29 @@ module.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', function($sc
         if(hall.mealdesc) return hall.mealdesc;
         else return "Open for " + hall.meal.charAt(0).toUpperCase() + hall.meal.slice(1);
     }
+
+    $scope.rate = function(hall, action) {
+        var request = BASE_URL + "rate?item=" + hall.mealid + "&user=" + USER_ID + "&action=" + action;
+
+        $http.get(request).success(function(data) {
+            if(data.error) {
+                if(data.error.toLowerCase() == "already voted")
+                    $ionicLoading.show({ template: 'Already voted.', noBackdrop: true, duration: 2000 });
+            } else {
+                if(data.result.toLowerCase() == "downvoted") {
+                    hall.downvotes++;
+                    hall.rating = "downvote";
+                }
+
+                if(data.result.toLowerCase() == "upvoted") {
+                    hall.upvotes++;
+                    hall.rating = "upvote";
+                }
+            }
+
+        }).error(function(data, status, headers, config) {
+            $ionicLoading.show({ template: 'Could not upvote.', noBackdrop: true, duration: 2000 });
+        });
+    }
     $scope.refresh();
 }]);
