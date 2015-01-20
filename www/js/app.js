@@ -30,7 +30,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/',
         templateUrl: 'home.html'
     }).state('hall', {
-        url: '/hall/:name',
+        url: '/hall/:id',
         templateUrl: 'hall.html'
     });
 })
@@ -50,7 +50,7 @@ app.run(function($ionicPlatform) {
 
 var BASE_URL = 'http://varunramesh.net:3000/';
 
-app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', function($scope, $http, $ionicLoading, $location) {
+app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $ionicNavBarDelegate) {
     $scope.halls = [];
     $scope.refresh = function() {
         $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
@@ -94,19 +94,23 @@ app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', fu
         });
     }
 
-    $scope.go = function ( path ) {
-        $location.path( path );
+    $scope.go = function ( hall ) {
+        window.hall = hall;
+        $location.path('/hall/' + hall.id);
     };
 
     $scope.refresh();
 }]);
 
-app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', function($scope, $http, $ionicLoading, $location) {
-   /* var HALL_ID = $routeParams.hallid;
-    $scope.hall = {};
+app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate) {
+    var HALL_ID = $stateParams.id;
+    $scope.hall = window.hall;
     $scope.refresh = function() {
         $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
-            $scope.halls = data;
+            console.log(data);
+            angular.forEach(data, function(hall, index){
+               if(hall.id == HALL_ID) $scope.hall = hall;
+            });
         }).error(function(data, status, headers, config) {
             $ionicLoading.show({ template: 'Could not load dining halls.', noBackdrop: true, duration: 2000 });
         }).finally(function() {
@@ -115,5 +119,5 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', fun
         });
     }
 
-    $scope.refresh();*/
+    $scope.refresh();
 }]);
