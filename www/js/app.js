@@ -108,16 +108,35 @@ app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$
     $scope.refresh();
 }]);
 
-app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate) {
 
+function resize() {
+    var height = document.getElementById("content-pane").offsetHeight - document.getElementById("header").offsetHeight - document.getElementById("footer").offsetHeight;
+    console.log(height);
+    document.getElementById("comments").style.height = height + "px";
+}
+
+angular.element(document).ready(function () {
+    angular.element( window ).on('resize', resize);
+});
+
+app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate) {
     var HALL_ID = $stateParams.id;
     $scope.hall = window.hall;
     $scope.comments = [];
 
+    resize();
+
     $scope.refresh = function() {
         $http.get(BASE_URL + 'halls?user=' + USER_ID).success(function(data) {
             angular.forEach(data, function(hall, index){
-               if(hall.id == HALL_ID) $scope.hall = hall;
+               if(hall.id == HALL_ID) {
+                    if($scope.hall) {
+                        $scope.hall = hall;
+                    } else {
+                        $scope.hall = hall;
+                        $scope.refresh();
+                    }
+               }
             });
         }).error(function(data, status, headers, config) {
             $ionicLoading.show({ template: 'Could not load dining halls.', noBackdrop: true, duration: 2000 });

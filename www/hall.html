@@ -1,6 +1,6 @@
 <ion-view ng-controller="HallCtrl">
-    <ion-content scroll="false" class="has-header">
-    	<div class="item">
+    <ion-content scroll="false" id="content-pane" class="has-header">
+    	<div class="item" id="header">
     		<div class="row">
             	<div class="col col-80">
                 	<strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
@@ -32,12 +32,12 @@
 	    </div>
 
 
-        <ion-scroll zooming="false" direction="y" class="comments-scroll">
+        <ion-scroll id="comments" zooming="false" direction="y" class="comments-scroll">
             <ion-refresher
                     pulling-text="Pull to refresh..."
                     on-refresh="refresh()">
             </ion-refresher>
-            <ion-list class="comments-scroll">
+            <ion-list>
                 <div class="item" ng-repeat="comment in comments">
                     <div class="row">
                         <div ng-if="comment.text" class="col col-80">
@@ -73,7 +73,7 @@
         </ion-scroll>
 
 
-        <div class="row comment-entry item">
+        <div class="row comment-entry item" id="footer">
             <input type="text" placeholder="What's on your plate?">
             <button ng-click="" class="button button-clear button-dark centered_text">
                 <i class="icon ion-paper-airplane"></i>

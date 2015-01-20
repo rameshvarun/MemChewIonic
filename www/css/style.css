@@ -24,8 +24,8 @@
 }
 
 .comment-image > img {
-    max-width: 300px;
-    max-height: 500px;
+    width: 300px;
+    max-width: 90%;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -39,8 +39,8 @@
     background-color: #ffffff;
 }
 
-.comment-scroll {
+.comments-scroll {
     width: 100%;
-    bottom: 0px;
     background-color: #ffffff;
+
 }
