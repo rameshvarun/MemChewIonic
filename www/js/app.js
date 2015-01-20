@@ -140,6 +140,19 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
         else return "Open for " + hall.meal.charAt(0).toUpperCase() + hall.meal.slice(1);
     }
 
+    $scope.photo = function() {
+        navigator.camera.getPicture(function(imageURI) {
+
+            // imageURI is the URL of the image that we can use for
+            // an <img> element or backgroundImage.
+
+        }, function(err) {
+
+            // Ruh-roh, something bad happened
+
+        });
+    };
+
     $scope.rate = rate_function($http, $ionicLoading);
 
     $scope.refresh();
