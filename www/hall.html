@@ -1,6 +1,6 @@
 <ion-view ng-controller="HallCtrl">
     <ion-content scroll="false" id="content-pane" class="has-header">
-    	<div class="item" id="header">
+    	<div class="item item-text-wrap" id="header">
     		<div class="row">
             	<div class="col col-80">
                 	<strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
@@ -38,7 +38,7 @@
                     on-refresh="refresh()">
             </ion-refresher>
             <ion-list>
-                <div class="item" ng-repeat="comment in comments">
+                <div class="item item-text-wrap" ng-repeat="comment in comments">
                     <div class="row">
                         <div ng-if="comment.text" class="col col-80">
                            {{comment.text}}
