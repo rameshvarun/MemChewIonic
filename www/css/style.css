@@ -32,15 +32,17 @@
 }
 
 .comment-entry {
-    height: 50px;
-    position: fixed;
-    bottom: 0px;
-    z-order: 10;
-    background-color: #ffffff;
+
 }
 
 .comments-scroll {
-    width: 100%;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
+}
 
+.comment-list {
+    top: 244px;
+}
+.hall-header {
+    background-color: #ffffff;
+    height:auto;
 }

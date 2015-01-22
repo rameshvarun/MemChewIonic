@@ -108,15 +108,11 @@ app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$
     $scope.refresh();
 }]);
 
-
 function resize() {
-    var height = $("#content-pane").height() - $("#header").height() - $("#footer").height();
-    $("#comments").height(height);
+    $(".comment-list").css("top", (50 + $(".hall-header").height()) + "px");
 }
 
-$(function () {
-    $( window ).on('resize', resize);
-});
+$(window).resize(resize);
 
 app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate) {
     var HALL_ID = $stateParams.id;
@@ -137,6 +133,8 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
                     }
                }
             });
+
+            resize();
         }).error(function(data, status, headers, config) {
             $ionicLoading.show({ template: 'Could not load dining halls.', noBackdrop: true, duration: 2000 });
         }).finally(function() {

@@ -1,38 +1,35 @@
 <ion-view ng-controller="HallCtrl">
-    <ion-content scroll="false" id="content-pane" class="has-header">
-    	<div class="item item-text-wrap" id="header">
-    		<div class="row">
-            	<div class="col col-80">
-                	<strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
-            	</div>
-            	<div class="col col-20" align="right">
-                	<div class="row">
-                    	<button ng-click="rate(hall, 'upvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
-                        <i class="icon ion-chevron-up {{ hall.rating == 'upvote' ? 'rating-upvote' : 'rating-none'}}"></i>
-                    	</button>
-                	</div>
-            		<div class="row">
-                    	<div class="centered_text rating-{{hall.rating}}">{{ score(hall) }}</div>
-              		</div>
-                	<div class="row">
-                    	<button ng-click="rate(hall, 'downvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
-                    		<i class="icon ion-chevron-down {{ hall.rating == 'downvote' ? 'rating-downvote' : 'rating-none'}}"></i>
-                    	</button>
-                	</div>
-            	</div>
-        	</div>
-        	<div class="row">
-            	<div class="col">
-                	<p>{{hall.comments}} comments</p>
-            	</div>
-            	<div class="col" align="right">
-                	<p>Closes {{hall.closes}}</p>
-            	</div>
-	        </div>
-	    </div>
-
-
-        <ion-scroll id="comments" zooming="false" direction="y" class="comments-scroll">
+    <div class="bar bar-subheader hall-header">
+            <div class="row">
+                <div class="col col-80">
+                    <strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
+                </div>
+                <div class="col col-20" align="right">
+                    <div class="row">
+                        <button ng-click="rate(hall, 'upvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
+                            <i class="icon ion-chevron-up {{ hall.rating == 'upvote' ? 'rating-upvote' : 'rating-none'}}"></i>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="centered_text rating-{{hall.rating}}">{{ score(hall) }}</div>
+                    </div>
+                    <div class="row">
+                        <button ng-click="rate(hall, 'downvote');$event.stopPropagation()" class="button button-clear button-dark centered_text">
+                            <i class="icon ion-chevron-down {{ hall.rating == 'downvote' ? 'rating-downvote' : 'rating-none'}}"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>{{hall.comments}} comments</p>
+                </div>
+                <div class="col" align="right">
+                    <p>Closes {{hall.closes}}</p>
+                </div>
+            </div>
+    </div>
+    <ion-content id="content-pane" class="comment-list">
             <ion-refresher
                     pulling-text="Pull to refresh..."
                     on-refresh="refresh()">
@@ -70,10 +67,10 @@
                     </div>
                 </div>
             </ion-list>
-        </ion-scroll>
+    </ion-content>
 
-
-        <div class="row comment-entry item" id="footer">
+    <ion-footer-bar align-title="left" class="bar-light comment-entry padding-horizontal">
+        <div class="row" id="footer">
             <input type="text" placeholder="What's on your plate?">
             <button ng-click="" class="button button-clear button-dark centered_text">
                 <i class="icon ion-paper-airplane"></i>
@@ -82,9 +79,6 @@
                 <i class="icon ion-camera"></i>
             </button>
         </div>
-
-
-
-    </ion-content>
+    </ion-footer-bar>
 
 </ion-view>

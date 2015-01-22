@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.memchewionic488402" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>MemChewIonic</name>
+<widget id="net.varunramesh.memchew" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Stanford MemChew</name>
   <description>
         An Ionic Framework and Cordova project.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="varunprime@yahoo.com" href="http://varunramesh.net/">
+      Varun Ramesh, Jean-Luc Watson
     </author>
   <content src="index.html"/>
   <access origin="*"/>
