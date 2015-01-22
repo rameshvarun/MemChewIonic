@@ -145,6 +145,8 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
         if($scope.hall) {
             $http.get(BASE_URL + "comments?user=" + USER_ID + "&meal=" + $scope.hall.mealid).success(function(data) {
                 $scope.comments = data;
+
+                // TODO: Scroll to last_posted comment
             });
         }
     }
@@ -171,5 +173,34 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
 
     $scope.rate = rate_function($http, $ionicLoading);
 
+    $scope.last_comment = null;
     $scope.refresh();
+
+    $scope.text = "";
+    $scope.comment = function() {
+        var text = $scope.text;
+        $scope.text = "";
+
+        if(text) {
+            var request = $http({
+                method: "post",
+                url: BASE_URL + "comment",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                data : $.param({
+                    meal: $scope.hall.mealid,
+                    user: USER_ID,
+                    comment: text
+                })
+            });
+            request.success(function(data) {
+               if(data.result == "Added comment") {
+                   $scope.last_comment = data.comment.id;
+                   $scope.refresh();
+               }
+            });
+            request.error(function(data) {
+                $ionicLoading.show({ template: 'Failed to post comment.', noBackdrop: true, duration: 2000 });
+            });
+        }
+    }
 }]);

@@ -71,8 +71,8 @@
 
     <ion-footer-bar align-title="left" class="bar-light comment-entry padding-horizontal">
         <div class="row" id="footer">
-            <input type="text" placeholder="What's on your plate?">
-            <button ng-click="" class="button button-clear button-dark centered_text">
+            <input ng-model="text" type="text" placeholder="What's on your plate?">
+            <button ng-click="comment()" class="button button-clear button-dark centered_text">
                 <i class="icon ion-paper-airplane"></i>
             </button>
             <button ng-click="photo()" class="button button-clear button-dark centered_text">
