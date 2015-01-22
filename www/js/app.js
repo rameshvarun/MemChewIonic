@@ -110,12 +110,12 @@ app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$
 
 
 function resize() {
-    var height = document.getElementById("content-pane").offsetHeight - document.getElementById("header").offsetHeight - document.getElementById("footer").offsetHeight;
-    document.getElementById("comments").style.height = height + "px";
+    var height = $("#content-pane").height() - $("#header").height() - $("#footer").height();
+    $("#comments").height(height);
 }
 
-angular.element(document).ready(function () {
-    angular.element( window ).on('resize', resize);
+$(function () {
+    $( window ).on('resize', resize);
 });
 
 app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate) {
