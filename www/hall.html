@@ -1,5 +1,6 @@
 <ion-view ng-controller="HallCtrl">
     <div class="bar bar-subheader hall-header">
+        <div class="item item-text-wrap" style="border: none;">
             <div class="row">
                 <div class="col col-80">
                     <strong>{{hall.name}}</strong> <br> <br> {{mealdesc(hall)}}
@@ -23,6 +24,7 @@
                     <p>Closes {{hall.closes}}</p>
                 </div>
             </div>
+        </div>
     </div>
     <ion-content delegate-handle="comments-scroll" id="content-pane" class="comment-list">
             <ion-refresher

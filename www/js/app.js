@@ -155,6 +155,7 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
                         $comments_scroll = $ionicScrollDelegate.$getByHandle("comments-scroll");
                         $item = $('[data-comment="' + $scope.last_comment + '"]');
                         $comments_scroll.scrollTo(0, $item.position().top);
+                        $scope.last_comment = null;
                     }
                 }, 500)
 
