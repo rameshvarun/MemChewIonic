@@ -109,13 +109,15 @@ app.controller('HallsCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$
 }]);
 
 function resize() {
-    $(".comment-list").css("top", (50 + $(".hall-header").height()) + "px");
+    $(".comment-list").css("top", ($("ion-header-bar").outerHeight() + $(".hall-header").outerHeight()) + "px");
 }
 
 $(window).resize(resize);
 
 app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate) {
     var HALL_ID = $stateParams.id;
+
+    $scope.USER_ID = USER_ID;
     $scope.hall = window.hall;
     $scope.comments = [];
 
