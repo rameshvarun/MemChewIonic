@@ -54,3 +54,7 @@
 .footer-button {
     padding-right: 2px;
 }
+
+.item p {
+    font-size: 15px;
+}
