@@ -204,8 +204,8 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
             quality : 49,
             destinationType : Camera.DestinationType.DATA_URL,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 400,
-            targetHeight: 400
+            targetWidth: 500,
+            targetHeight: 500
         });
     };
 
