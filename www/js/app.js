@@ -161,15 +161,37 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
     }
 
     $scope.photo = function() {
-        navigator.camera.getPicture(function(imageURI) {
-
-            // imageURI is the URL of the image that we can use for
-            // an <img> element or backgroundImage.
+        navigator.camera.getPicture(function(image) {
+            var request = $http({
+                method: "post",
+                url: BASE_URL + "comment",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                data : $.param({
+                    meal: $scope.hall.mealid,
+                    user: USER_ID,
+                    image: image
+                })
+            });
+            request.success(function(data) {
+                if(data.result == "Added comment") {
+                    $scope.last_comment = data.comment.id;
+                    $scope.refresh();
+                }
+            });
+            request.error(function(data) {
+                $ionicLoading.show({ template: 'Failed to post image.', noBackdrop: true, duration: 2000 });
+            });
 
         }, function(err) {
 
             // Ruh-roh, something bad happened
 
+        }, {
+            quality : 49,
+            destinationType : Camera.DestinationType.DATA_URL,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 400,
+            targetHeight: 400
         });
     };
 
