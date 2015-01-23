@@ -114,7 +114,8 @@ function resize() {
 
 $(window).resize(resize);
 
-app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate) {
+app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$stateParams', '$ionicNavBarDelegate', '$ionicScrollDelegate',
+    function($scope, $http, $ionicLoading, $location, $stateParams, $ionicNavBarDelegate, $ionicScrollDelegate) {
     var HALL_ID = $stateParams.id;
 
     $scope.USER_ID = USER_ID;
@@ -149,6 +150,19 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
                 $scope.comments = data;
 
                 // TODO: Scroll to last_posted comment
+                setTimeout(function() {
+                    if($scope.last_comment) {
+                        $comments_scroll = $ionicScrollDelegate.$getByHandle("comments-scroll");
+                        $item = $('[data-comment="' + $scope.last_comment + '"]');
+                        $comments_scroll.scrollTo(0, $item.position().top);
+                    }
+                }, 500)
+
+
+                    /*
+
+                    $scope.last_comment = null;*/
+
             });
         }
     }
@@ -218,6 +232,7 @@ app.controller('HallCtrl', ['$scope', '$http', '$ionicLoading', '$location', '$s
             });
             request.success(function(data) {
                if(data.result == "Added comment") {
+                   console.log(data);
                    $scope.last_comment = data.comment.id;
                    $scope.refresh();
                }
