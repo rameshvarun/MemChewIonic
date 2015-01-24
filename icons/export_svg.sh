@@ -4,6 +4,7 @@
 # <!-- iPhone / iPod Touch -->
 inkscape -f icon.svg -e ios/icon-60.png -w 60 -h 60
 inkscape -f icon.svg -e ios/icon-60@2x.png -w 120 -h 120
+inkscape -f icon.svg -e ios/icon-60@3x.png -w 180 -h 180
 
 # <!-- iPad -->
 inkscape -f icon.svg -e ios/icon-76.png -w 76 -h 76
