@@ -5,6 +5,11 @@ Other Parts:
 - [MemChewAndroid](https://github.com/rameshvarun/MemChewAndroid) - Native Android Client
 - [MemChewServer](https://github.com/rameshvarun/MemChewServer) - Server side code.
 
+# Screenshots
+
+![Imgur](http://i.imgur.com/BpuSE3s.jpg)
+![Imgur](http://i.imgur.com/oxIYY1z.jpg)
+
 # Setup
 A large portion of the ionic and cordova toolchain is written in node,
 so you will need access to that. If you don't already, install cordova and ionic
