@@ -7,8 +7,8 @@ Other Parts:
 
 # Screenshots
 
-![Imgur](http://i.imgur.com/BpuSE3s.jpg)
-![Imgur](http://i.imgur.com/oxIYY1z.jpg)
+![Imgur](./screenshots/BpuSE3s.jpg)
+![Imgur](./screenshots/oxIYY1z.jpg)
 
 # Setup
 A large portion of the ionic and cordova toolchain is written in node,
